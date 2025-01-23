@@ -45,21 +45,21 @@ def main():
     hashLinear = HashLinear(qntBuckets, tamanhoPagina, campos)
     
     acoes = {
-        1: lambda: inserirRegistro(hashLinear, campos),
-        2: lambda: removerRegistro(hashLinear),
-        3: lambda: buscarRegistro(hashLinear),
-        4: lambda: mostrarHash(hashLinear),
-        5: lambda: casosDeTeste(hashLinear),
+        1: lambda: casosDeTeste(hashLinear),
+        2: lambda: inserirRegistro(hashLinear, campos),
+        3: lambda: removerRegistro(hashLinear),
+        4: lambda: buscarRegistro(hashLinear),
+        5: lambda: mostrarHash(hashLinear),
         0: lambda: print("====== SAINDO ======") or sleep(2)
     }
     
     while True:
         print("====== MENU DE AÇÕES (HASH LINEAR) ======")
-        print("1. Inserir registro")
-        print("2. Remover registro")
-        print("3. Fazer busca por igualdade")
-        print("4. Mostrar hash linear")
-        print("5. Casos de teste")
+        print("1. Casos de teste")
+        print("2. Inserir registro")
+        print("3. Remover registro")
+        print("4. Fazer busca por igualdade")
+        print("5. Mostrar hash linear")
         print("0. Sair do menu")
         
         resp = int(input("Informe sua resposta: "))
@@ -68,8 +68,6 @@ def main():
             acoes[resp]()
             if resp == 0:
                 break
-        else:
-            print("Opção inválida. Tente novamente.")
 
 if __name__ == '__main__':
     main()
