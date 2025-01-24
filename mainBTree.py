@@ -54,29 +54,30 @@ def main():
     arvore = ArvoreBPlus(tamanhoPagina, numCampos)
     
     acoes = {
-        1: lambda: casosDeTeste(hashLinear),
-        2: lambda: inserirRegistro(hashLinear, campos),
-        3: lambda: removerRegistro(hashLinear),
-        4: lambda: buscarRegistro(hashLinear),
-        5: lambda: mostrarHash(hashLinear),
-        0: lambda: print("====== SAINDO ======") or sleep(2)
+        1: lambda: casosTeste(arvore),
+        2: lambda: inserirRegistro(arvore, numCampos),
+        3: lambda: removerRegistro(arvore),
+        4: lambda: buscarIgualdade(arvore),
+        5: lambda: buscarIntervalo(arvore),
+        6: lambda: arvore.mostrarArvore(),
     }
+
+    resp = 0
     
-    while True:
-        print("====== MENU DE AÇÕES (HASH LINEAR) ======")
+    while resp != 7:
+        print("\n*     ÁRVORE B+     *\n")
         print("1. Casos de teste")
         print("2. Inserir registro")
         print("3. Remover registro")
-        print("4. Fazer busca por igualdade")
-        print("5. Mostrar hash linear")
-        print("0. Sair do menu")
+        print("4. Busca por igualdade")
+        print("5. Busca por intervalo")
+        print("6. Mostrar árvore")
+        print("7. Sair")
         
         resp = int(input("Informe sua resposta: "))
         
         if resp in acoes:
             acoes[resp]()
-            if resp == 0:
-                break
 
 if __name__ == '__main__':
     main()

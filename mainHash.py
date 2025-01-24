@@ -53,21 +53,21 @@ def main():
         0: lambda: print("====== SAINDO ======") or sleep(2)
     }
     
-    while True:
-        print("====== MENU DE AÇÕES (HASH LINEAR) ======")
+    resp = 0
+
+    while resp != 7:
+        print("\n*     HASH LINEAR     *\n")
         print("1. Casos de teste")
         print("2. Inserir registro")
         print("3. Remover registro")
-        print("4. Fazer busca por igualdade")
+        print("4. Fazer busca")
         print("5. Mostrar hash linear")
-        print("0. Sair do menu")
+        print("7. Sair do menu")
         
         resp = int(input("Informe sua resposta: "))
         
         if resp in acoes:
             acoes[resp]()
-            if resp == 0:
-                break
 
 if __name__ == '__main__':
     main()
