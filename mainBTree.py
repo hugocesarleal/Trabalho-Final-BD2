@@ -1,5 +1,5 @@
-from bplusTree import ArvoreBPlus
-from time import time, sleep
+from bPlusTree import ArvoreBPlus
+from time import time
 import os
 
 def inserirRegistro(arvore, numCampos):
@@ -75,7 +75,7 @@ def main():
         print("4. Busca por igualdade")
         print("5. Busca por intervalo")
         print("6. Mostrar árvore")
-        print("7. Sair")
+        print("7. Voltar")
         
         resp = int(input(""))
         

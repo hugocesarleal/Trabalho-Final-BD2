@@ -1,5 +1,5 @@
 from hashLinear import HashLinear
-from time import time, sleep
+from time import time
 import os
 
 def inserirRegistro(hashLinear, campos):
@@ -50,19 +50,18 @@ def main():
         3: lambda: removerRegistro(hashLinear),
         4: lambda: buscarRegistro(hashLinear),
         5: lambda: mostrarHash(hashLinear),
-        0: lambda: print("====== SAINDO ======") or sleep(2)
     }
     
     resp = 0
 
-    while resp != 7:
+    while resp != 6:
         print("\n*     HASH LINEAR     *\n")
         print("1. Casos de teste")
         print("2. Inserir registro")
         print("3. Remover registro")
         print("4. Fazer busca")
         print("5. Mostrar hash linear")
-        print("7. Sair do menu")
+        print("6. Voltar")
         
         resp = int(input("Informe sua resposta: "))
         
