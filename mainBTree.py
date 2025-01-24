@@ -20,16 +20,19 @@ def buscarIgualdade(arvore):
         print(f"Registro: {r}")
 
 def buscarIntervalo(arvore):
-    print("A - Maior ( > )")
-    print("B - Menor ( < )")
-    print("C - Entre dois números ( | )")
-    opcao = input("Informe a opção desejada, juntamente com o(s) número(s), separados por ',': ").split(',')
-    if opcao[0] == 'A':
-        arvore.procurarIntervalo(arvore.procurar(int(opcao[1])), int(opcao[1]), 0, '>')
-    elif opcao[0] == 'B':
-        arvore.procurarIntervalo(arvore.procurar(int(opcao[1])), int(opcao[1]), 0, '<')
-    elif opcao[0] == 'C':
-        arvore.procurarIntervalo(arvore.procurar(int(opcao[1])), int(opcao[1]), int(opcao[2]), '|')
+    opcao = input("Informe a opção desejada (1 - Maior, 2 - Menor, 3 - Entre dois números): ").upper()
+    if opcao == '1':
+        valor = int(input("Informe o valor: "))
+        arvore.procurarIntervalo(arvore.procurar(valor), valor, 0, '>')
+    elif opcao == '2':
+        valor = int(input("Informe o valor: "))
+        arvore.procurarIntervalo(arvore.procurar(valor), valor, 0, '<')
+    elif opcao == '3':
+        valor1 = int(input("Informe o primeiro valor: "))
+        valor2 = int(input("Informe o segundo valor: "))
+        arvore.procurarIntervalo(arvore.procurar(valor1), valor1, valor2, '|')
+    else:
+        print("Opção inválida.")
 
 def casosTeste(arvore):
     basePath = os.path.dirname(os.path.abspath(__file__))
@@ -74,7 +77,7 @@ def main():
         print("6. Mostrar árvore")
         print("7. Sair")
         
-        resp = int(input("Informe sua resposta: "))
+        resp = int(input(""))
         
         if resp in acoes:
             acoes[resp]()
