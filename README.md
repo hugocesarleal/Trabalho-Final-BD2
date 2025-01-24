@@ -58,7 +58,7 @@ Ao escolher a opção de Árvore B+, o seguinte menu será exibido:
 
 ### Hash Linear
 
-Ao escolher a opção de Hash Linear, o seguinte menu será exibido:
+Ao escolher a opção de Hash Linear, o seguinte menu será exibido: 
 
 - Casos de teste
 - Inserir registro
