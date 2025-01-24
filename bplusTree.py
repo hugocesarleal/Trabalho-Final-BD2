@@ -1,19 +1,31 @@
+"""""
+---------------------------------------------------------
+       Trabalho Final - Banco de Dados II
+
+    Implementação de Árvore B e Hash Linear
+    Andressa Caroline Lopes de Assis - RA:0072749
+    Hugo César Leal - RA:0072753
+---------------------------------------------------------
+"""
+
 from math import floor, ceil
 from sys import getsizeof, maxsize
 
+# Classe que representa um nó da árvore B+
 class No:
     def __init__(self, ordem) -> None:
-        self.ordem = ordem
-        self.eFolha = False
-        self.pai = None
-        self.proximo = None
-        self.anterior = None
-        self.registros = []
-        self.filhos = []
+        self.ordem = ordem  # Ordem do nó
+        self.eFolha = False  # Indica se o nó é uma folha
+        self.pai = None  # Referência ao nó pai
+        self.proximo = None  # Referência ao próximo nó (usado em folhas)
+        self.anterior = None  # Referência ao nó anterior (usado em folhas)
+        self.registros = []  # Lista de registros/chaves do nó
+        self.filhos = []  # Lista de filhos do nó
 
     def getOrdem(self):
-        return self.ordem
+        return self.ordem  # Retorna a ordem do nó
 
+    # Insere uma chave no nó (não folha)
     def inserir(self, chave) -> None:
         if not self.registros:
             self.registros.append(chave)
@@ -25,6 +37,7 @@ class No:
             else:
                 self.registros.append(chave)
 
+    # Insere uma chave e registro no nó folha
     def inserirFolha(self, chave, registro) -> None:
         if not self.registros:
             self.registros.append(registro)
@@ -36,12 +49,14 @@ class No:
             else:
                 self.registros.append(registro)
 
+    # Exclui uma chave do nó
     def excluir(self, chave) -> None:
         for i in range(len(self.registros)):
             if self.registros[i][0] == chave:
                 self.registros.pop(i)
                 break
 
+    # Rotaciona chaves entre nós irmãos
     def rotacionarChaves(self, esquerda, direita, indice, lado):
         if lado == 0:
             direita.inserir(self.registros.pop(indice))
@@ -56,6 +71,7 @@ class No:
             no_.pai = esquerda
             esquerda.filhos.append(no_)
 
+    # Junta dois nós
     def juntar(self, no):
         self.registros.extend(no.registros)
         self.proximo = no.proximo
@@ -64,6 +80,7 @@ class No:
         del no
         return self
 
+    # Divide um nó folha
     def dividir(self, chave, registro):
         direita = No(self.getOrdem())
         direita.eFolha = True
@@ -79,24 +96,28 @@ class No:
             direita.proximo.anterior = direita
         return direita
 
+    # Empresta uma chave para um nó irmão
     def emprestar(self, no, lado) -> None:
         if lado == 0:
             no.inserirFolha(self.registros[-1][0], self.registros.pop())
         elif lado == 1:
             no.inserirFolha(self.registros[0][0], self.registros.pop(0))
 
+# Classe que representa a árvore B+
 class ArvoreBPlus:
     def __init__(self, tamanho, quantidade):
         self.ordem, self.ordemPai = self.calcularOrdem(tamanho, quantidade)
         self.raiz = No(self.ordem)
         self.raiz.eFolha = True
     
+    # Calcula a ordem da árvore com base no tamanho e quantidade de campos
     def calcularOrdem(self, tamanho, numCampos):
         vetor = [maxsize] * numCampos
         ordemFolha = tamanho // getsizeof(vetor)
         ordemNFolha = tamanho // getsizeof(maxsize)
         return ordemFolha, ordemNFolha
     
+    # Insere uma chave e registro na árvore
     def inserir(self, chave, registro):
         no = self.procurar(chave)
         if not self.procurarChave(no, chave):
@@ -107,6 +128,7 @@ class ArvoreBPlus:
                 if direita:
                     self.inserirPai(no, direita.registros[0][0], direita)
     
+    # Insere uma chave no nó pai
     def inserirPai(self, esquerda, chave, direita):
         if self.raiz == esquerda:
             novaRaiz = No(self.ordemPai)
@@ -141,6 +163,7 @@ class ArvoreBPlus:
                 else:
                     self.inserirPai(pai, novaChave, novoNo)
     
+    # Exclui uma chave da árvore
     def excluir(self, chave):
         no = self.procurar(chave)
         if no == self.raiz:
@@ -151,6 +174,7 @@ class ArvoreBPlus:
             else:
                 self.excluirAuxiliar(no, chave)
     
+    # Auxilia na exclusão de uma chave
     def excluirAuxiliar(self, no, chave):
         if len(no.registros) <= floor(no.getOrdem() / 2):
             vizinhoEsquerda = no.anterior
@@ -179,6 +203,7 @@ class ArvoreBPlus:
                         self.mudarPai(noPai)
         no.excluir(chave)
     
+    # Procura um nó que contém a chave
     def procurar(self, chave):
         no = self.raiz
         while not no.eFolha:
@@ -191,9 +216,11 @@ class ArvoreBPlus:
                 no = no.filhos[i]
         return no
     
+    # Procura uma chave específica em um nó
     def procurarChave(self, no, chave):
         return next((r for r in no.registros if r[0] == chave), None)
     
+    # Procura chaves em um intervalo
     def procurarIntervalo(self, no, c1, c2, operador):
         if operador == '>':
             while no:
@@ -214,6 +241,7 @@ class ArvoreBPlus:
                         print(registro, end=" <-> ")
                 no = no.proximo
     
+    # Muda o pai de um nó
     def mudarPai(self, no):
         noPai = no.pai
         indice = noPai.filhos.index(no)
@@ -249,6 +277,7 @@ class ArvoreBPlus:
                 else:
                     self.mudarPai(noPai)
     
+    # Mostra a estrutura da árvore
     def mostrarArvore(self):
         if not self.raiz.registros:
             return
