@@ -1,6 +1,6 @@
 # Trabalho Final - Banco de Dados II
 
-Este projeto implementa duas estruturas de dados: Árvore B+ e Hash Linear. Ele foi desenvolvido por Andressa Caroline Lopes de Assis (RA:0072749) e Hugo César Leal (RA:0072753) como parte do trabalho final da disciplina de Banco de Dados II.
+Este projeto implementa duas estruturas de dados: Árvore B+ e Hash Linear. Ele foi desenvolvido por [Andressa Caroline Lopes de Assis](https://github.com/AndreessaLopes) e [Hugo César Leal](https://github.com/hugocesarleal/) como parte do trabalho final da disciplina de Banco de Dados II.
 
 ## Estrutura do Projeto
 
